@@ -1,8 +1,9 @@
-package ru.sunshine747.appeal;
+package ru.sunshine747.appeal.model;
 
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-@lombok.Data
+@Data
 @Accessors(chain = true)
 public class PersonalInfo {
     private String fullname;

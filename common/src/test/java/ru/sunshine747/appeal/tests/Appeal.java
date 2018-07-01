@@ -1,19 +1,20 @@
-package ru.sunshine747.appeal;
+package ru.sunshine747.appeal.tests;
 
 import org.testng.annotations.Test;
+import ru.sunshine747.appeal.model.PersonalInfo;
 
-public class TestAppeal extends TestTemplate {
+public class Appeal extends TestTemplate {
 
     @Test
     public void testAppeal() {
 
-        fillAppealForm(new PersonalInfo()
+        page.fillAppealForm(new PersonalInfo()
                         .setFullname("Зоя Александровна Кузнецова")
                         .setFullAddress("г Москва, шоссе Внуковское 1-й километр ")
                         .setPhone("+7 234  234 23 34")
                         .setEmail("1@1.ru"));
-        putMessage("test message");
-        sendMessage();
+        page.putMessage("test message");
+        page.sendMessage();
     }
 
 }
