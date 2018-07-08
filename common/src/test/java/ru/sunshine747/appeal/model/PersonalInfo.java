@@ -10,4 +10,5 @@ public class PersonalInfo {
     private String fullAddress;
     private String phone;
     private String email;
+    private String textMessage;
 }

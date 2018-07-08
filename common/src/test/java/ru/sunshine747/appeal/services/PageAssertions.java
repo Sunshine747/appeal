@@ -1,6 +1,7 @@
 package ru.sunshine747.appeal.services;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PageAssertions {
@@ -12,6 +13,8 @@ public class PageAssertions {
     }
 
     public void assertThatPageContentIsCorrect() {
+
+        //TODO: add asterisk check
 
         assertThat(page.getHeaderText(), equalTo("Обращение в правительство Москвы"));
         assertThat(page.getSecondHeaderText(), equalTo("Пожалуйста, укажите ваши контактные данные и суть вопроса"));
@@ -33,5 +36,27 @@ public class PageAssertions {
         assertThat(page.getStreetLableText(), equalTo("Улица"));
         assertThat(page.getHouseLableText(), equalTo("Дом"));
         assertThat(page.getFlatLableText(), equalTo("Квартира"));
-        assertThat(page.getSubmitButtonText(), equalTo("Отправить обращение"));    }
+        assertThat(page.getSubmitButtonText(), equalTo("Отправить обращение"));
+
+    }
+
+    public void assertThatFeedbackMessageIsCorrect() {
+
+        assertThat(page.getFeedbackMessageHead(), anyOf(
+                equalTo("Это не настоящее правительство :-("),
+                equalTo("Извините, у нас обед")));
+        assertThat(page.getFeedbackMessageBody(), anyOf(
+                equalTo("К сожалению, мы не можем принять ваше обращение.\n" +
+                        "Но вы всегда можете отправить его через электронную приемную правительства Москвы."),
+                equalTo("Прямо сейчас мы не можем принять ваше обращение.\n" +
+                        "Но вы всегда можете отправить его нотариально заверенную копию Почтой России по адресу: 125032, Москва, ул. Тверская, 13.")
+        ));
+
+    }
+
+    public void assertThatFeedbackButtonTextIsCorrect() {
+
+        assertThat(page.getFeedbackButtonText(), equalTo("Хорошо, я понял"));
+
+    }
 }

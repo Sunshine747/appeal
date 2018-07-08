@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.sunshine747.appeal.model.PersonalInfo;
 
 import java.util.concurrent.TimeUnit;
@@ -36,30 +38,28 @@ public class PageActions {
         wd.findElement(By.xpath("//form[@id='feedback-form']//button[.='Отправить обращение']")).click();
     }
 
-    public void putMessage(String textMessage) {
-        wd.findElement(By.xpath("//form[@id='feedback-form']/div[2]")).click();
-        wd.findElement(By.id("message")).click();
-        wd.findElement(By.id("message")).clear();
-        wd.findElement(By.id("message")).sendKeys(textMessage);
-    }
-
-    public void fillAppealForm(PersonalInfo personalInfo) {
+    public void fillAppealFormWithChoiceVariant(PersonalInfo personalInfo) {
         wd.findElement(By.id("fullname")).click();
         wd.findElement(By.id("fullname")).clear();
         wd.findElement(By.id("fullname")).sendKeys(personalInfo.getFullname());
+        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][2]")).click();
         wd.findElement(By.id("address")).click();
         wd.findElement(By.id("address")).clear();
         wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
         wd.findElement(By.id("address-house")).clear();
         wd.findElement(By.id("address-flat")).click();
         wd.findElement(By.id("address-flat")).clear();
-        wd.findElement(By.id("address-flat")).sendKeys("1");
+        wd.findElement(By.id("address-flat")).sendKeys("");
         wd.findElement(By.id("phone")).click();
         wd.findElement(By.id("phone")).clear();
         wd.findElement(By.id("phone")).sendKeys(personalInfo.getPhone());
         wd.findElement(By.id("email")).click();
         wd.findElement(By.id("email")).clear();
         wd.findElement(By.id("email")).sendKeys(personalInfo.getEmail());
+        wd.findElement(By.xpath("//form[@id='feedback-form']/div[2]")).click();
+        wd.findElement(By.id("message")).click();
+        wd.findElement(By.id("message")).clear();
+        wd.findElement(By.id("message")).sendKeys(personalInfo.getTextMessage());
     }
 
     public String getHeaderText() {
@@ -144,6 +144,23 @@ public class PageActions {
 
     public String getSubmitButtonText(){
         return wd.findElement(By.xpath(".//button[@class='btn btn-primary btn-lg']")).getText();
+    }
+
+    public String getFeedbackMessageHead() {
+        return wd.findElement(By.xpath(".//div[@id='feedback-message']/h4")).getText();
+    }
+
+    public String getFeedbackMessageBody() {
+        return wd.findElement(By.xpath(".//div[@id='feedback-message']/p")).getText();
+    }
+
+    public void waitFeedbackProgress() {
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("feedback-progress")));
+        new WebDriverWait(wd, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.id("feedback-progress")));
+    }
+
+    public String getFeedbackButtonText() {
+        return wd.findElement(By.xpath(".//button[@class='btn btn-default']")).getText();
     }
 
 }
