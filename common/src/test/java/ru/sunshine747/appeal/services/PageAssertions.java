@@ -1,5 +1,7 @@
 package ru.sunshine747.appeal.services;
 
+import org.hamcrest.core.IsNot;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.equalTo;
@@ -55,8 +57,15 @@ public class PageAssertions {
     }
 
     public void assertThatFeedbackButtonTextIsCorrect() {
-
         assertThat(page.getFeedbackButtonText(), equalTo("Хорошо, я понял"));
 
+    }
+
+    public void assertThatFeedbackMessageIsHide() {
+        assertThat(page.findFeedbackMessage(), equalTo(false));
+    }
+
+    public void assertThatFeedbackMessageIsPresent() {
+        assertThat(page.findFeedbackMessage(), equalTo(true));
     }
 }

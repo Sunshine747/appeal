@@ -36,31 +36,53 @@ public class PageActions {
 
     public void sendMessage() {
         wd.findElement(By.xpath("//form[@id='feedback-form']//button[.='Отправить обращение']")).click();
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("feedback-progress")));
+        new WebDriverWait(wd, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.id("feedback-progress")));
+
     }
 
-    public void fillAppealFormWithChoiceVariant(PersonalInfo personalInfo) {
+    public void fillFIOChoiceVariant(PersonalInfo personalInfo) {
         wd.findElement(By.id("fullname")).click();
         wd.findElement(By.id("fullname")).clear();
         wd.findElement(By.id("fullname")).sendKeys(personalInfo.getFullname());
-        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][2]")).click();
+        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][1]")).click();
+        wd.findElement(By.xpath("//form[@id='feedback-form']/div[2]")).click();
+
+    }
+
+    public void fillAddressChoiseVarian(PersonalInfo personalInfo) {
         wd.findElement(By.id("address")).click();
         wd.findElement(By.id("address")).clear();
         wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
-        wd.findElement(By.id("address-house")).clear();
-        wd.findElement(By.id("address-flat")).click();
-        wd.findElement(By.id("address-flat")).clear();
-        wd.findElement(By.id("address-flat")).sendKeys("");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        new WebDriverWait(wd, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
+        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][1]")).click();
+        //new WebDriverWait(wd, 10).until((ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]"))));
+    }
+
+    public void fillPhone(PersonalInfo personalInfo) {
         wd.findElement(By.id("phone")).click();
         wd.findElement(By.id("phone")).clear();
         wd.findElement(By.id("phone")).sendKeys(personalInfo.getPhone());
+    }
+
+    public void fillEmail(PersonalInfo personalInfo) {
         wd.findElement(By.id("email")).click();
         wd.findElement(By.id("email")).clear();
         wd.findElement(By.id("email")).sendKeys(personalInfo.getEmail());
-        wd.findElement(By.xpath("//form[@id='feedback-form']/div[2]")).click();
+    }
+
+    public void fillTextMessage(PersonalInfo personalInfo) {
         wd.findElement(By.id("message")).click();
         wd.findElement(By.id("message")).clear();
         wd.findElement(By.id("message")).sendKeys(personalInfo.getTextMessage());
     }
+
+
 
     public String getHeaderText() {
         return  wd.findElement(By.xpath(".//div[@class='page-header']/h1")).getText();
@@ -163,4 +185,15 @@ public class PageActions {
         return wd.findElement(By.xpath(".//button[@class='btn btn-default']")).getText();
     }
 
+    public void clickFeedbackButton() {
+        wd.findElement(By.xpath(".//button[@class='btn btn-default']")).click();
+        new WebDriverWait(wd, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.id("feedback-message")));
+    }
+
+    public boolean findFeedbackMessage() {
+        if (wd.findElement(By.id("feedback-message")).isDisplayed()) {
+            return true;
+        }
+        else return false;
+    }
 }
