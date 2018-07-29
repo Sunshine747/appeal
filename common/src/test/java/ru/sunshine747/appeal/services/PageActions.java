@@ -12,6 +12,7 @@ import ru.sunshine747.appeal.model.PersonalInfo;
 import java.util.concurrent.TimeUnit;
 
 public class PageActions {
+
     WebDriver wd;
 
     public static boolean isAlertPresent(FirefoxDriver wd) {
@@ -71,7 +72,7 @@ public class PageActions {
         wd.findElement(By.id("fullname-patronymic")).sendKeys(personalInfo.getPatronymic());
     }
 
-    public void fillAddressChoiseVarian(PersonalInfo personalInfo) {
+    public void fillAddressChoiceVariant(PersonalInfo personalInfo) {
         wd.findElement(By.id("address")).click();
         wd.findElement(By.id("address")).clear();
         wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
@@ -79,13 +80,59 @@ public class PageActions {
         wd.findElement(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")).click();
     }
 
-    public void fillAddress(PersonalInfo personalInfo) {
-        wd.findElement(By.id("address")).click();
-        wd.findElement(By.id("address")).clear();
-        wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
-        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
+    public void fillCity(PersonalInfo personalInfo) {
+        wd.findElement(By.id("address-city")).click();
+        wd.findElement(By.id("address-city")).clear();
+        wd.findElement(By.id("address-city")).sendKeys(personalInfo.getCity());
     }
 
+    public void fillStreet(PersonalInfo personalInfo) {
+        wd.findElement(By.id("address-street")).click();
+        wd.findElement(By.id("address-street")).clear();
+        wd.findElement(By.id("address-street")).sendKeys(personalInfo.getStreet());
+    }
+
+    public void fillHouse(PersonalInfo personalInfo) {
+        wd.findElement(By.id("address-house")).click();
+        wd.findElement(By.id("address-house")).clear();
+        wd.findElement(By.id("address-house")).sendKeys(personalInfo.getHouse());
+    }
+
+    public void fillFlat(PersonalInfo personalInfo) {
+        wd.findElement(By.id("address-flat")).click();
+        wd.findElement(By.id("address-flat")).clear();
+        wd.findElement(By.id("address-flat")).sendKeys(personalInfo.getFlat());
+    }
+
+    public void choiceAddress() {
+        wd.findElement(By.id("address")).click();
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")));
+        wd.findElement(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")).click();
+    }
+
+    public String getIndex() {
+        return wd.findElement(By.id("address-postal_code")).getAttribute("value");
+    }
+
+    public String getRegion() {
+        return wd.findElement(By.id("address-region")).getAttribute("value");
+    }
+
+    public String getCity() {
+        return wd.findElement(By.id("address-city")).getAttribute("value");
+    }
+
+    public String getStreet() {
+        return wd.findElement(By.id("address-street")).getAttribute("value");
+    }
+
+    public String getHouse() {
+        return wd.findElement(By.id("address-house")).getAttribute("value");
+    }
+
+    public String getFlat() {
+        return wd.findElement(By.id("address-flat")).getAttribute("value");
+    }
 
     public void fillPhone(PersonalInfo personalInfo) {
         wd.findElement(By.id("phone")).click();
@@ -216,13 +263,5 @@ public class PageActions {
             return true;
         }
         else return false;
-    }
-
-    public void findEmptyFieldAlert() {
-
-    }
-
-    public void switchTopWindow() {
-        wd.findElement(By.id("address")).click();
     }
 }

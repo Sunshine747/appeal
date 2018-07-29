@@ -12,6 +12,7 @@ public class NegativeTest extends TestTemplate {
             .setTextMessage("test")
             .setFullAddress("Москва");
 
+
     @Test
     public void emptyRequiredFieldsTest() {
         page.sendMessageForNegative();
