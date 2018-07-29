@@ -68,4 +68,8 @@ public class PageAssertions {
     public void assertThatFeedbackMessageIsPresent() {
         assertThat(page.findFeedbackMessage(), equalTo(true));
     }
+
+    public void assertAlert() {
+
+    }
 }

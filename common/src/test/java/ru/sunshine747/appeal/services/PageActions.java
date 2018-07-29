@@ -38,7 +38,10 @@ public class PageActions {
         wd.findElement(By.xpath("//form[@id='feedback-form']//button[.='Отправить обращение']")).click();
         new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("feedback-progress")));
         new WebDriverWait(wd, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.id("feedback-progress")));
+    }
 
+    public void sendMessageForNegative() {
+        wd.findElement(By.xpath("//form[@id='feedback-form']//button[.='Отправить обращение']")).click();
     }
 
     public void fillFIOChoiceVariant(PersonalInfo personalInfo) {
@@ -46,23 +49,43 @@ public class PageActions {
         wd.findElement(By.id("fullname")).clear();
         wd.findElement(By.id("fullname")).sendKeys(personalInfo.getFullname());
         wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][1]")).click();
-        wd.findElement(By.xpath("//form[@id='feedback-form']/div[2]")).click();
+    }
 
+    public void fillSurname(PersonalInfo personalInfo) {
+        wd.findElement(By.id("fullname-surname")).click();
+        wd.findElement(By.id("fullname-surname")).clear();
+        wd.findElement(By.id("fullname-surname")).sendKeys(personalInfo.getSurname());
+        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][2]")).click();
+    }
+
+    public void fillName(PersonalInfo personalInfo) {
+        wd.findElement(By.id("fullname-name")).click();
+        wd.findElement(By.id("fullname-name")).clear();
+        wd.findElement(By.id("fullname-name")).sendKeys(personalInfo.getName());
+        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][2]")).click();
+    }
+
+    public void fillPatronymic(PersonalInfo personalInfo) {
+        wd.findElement(By.id("fullname-patronymic")).click();
+        wd.findElement(By.id("fullname-patronymic")).clear();
+        wd.findElement(By.id("fullname-patronymic")).sendKeys(personalInfo.getPatronymic());
     }
 
     public void fillAddressChoiseVarian(PersonalInfo personalInfo) {
         wd.findElement(By.id("address")).click();
         wd.findElement(By.id("address")).clear();
         wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        new WebDriverWait(wd, 1).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
-        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][1]")).click();
-        //new WebDriverWait(wd, 10).until((ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]"))));
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
+        wd.findElement(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")).click();
     }
+
+    public void fillAddress(PersonalInfo personalInfo) {
+        wd.findElement(By.id("address")).click();
+        wd.findElement(By.id("address")).clear();
+        wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
+    }
+
 
     public void fillPhone(PersonalInfo personalInfo) {
         wd.findElement(By.id("phone")).click();
@@ -81,8 +104,6 @@ public class PageActions {
         wd.findElement(By.id("message")).clear();
         wd.findElement(By.id("message")).sendKeys(personalInfo.getTextMessage());
     }
-
-
 
     public String getHeaderText() {
         return  wd.findElement(By.xpath(".//div[@class='page-header']/h1")).getText();
@@ -195,5 +216,13 @@ public class PageActions {
             return true;
         }
         else return false;
+    }
+
+    public void findEmptyFieldAlert() {
+
+    }
+
+    public void switchTopWindow() {
+        wd.findElement(By.id("address")).click();
     }
 }
