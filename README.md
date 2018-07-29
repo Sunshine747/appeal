@@ -1,2 +1,2 @@
 # appeal
-Test-cases for http://hflabs.github.io/suggestions-demo/
+Autotest for http://hflabs.github.io/suggestions-demo/
