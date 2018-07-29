@@ -48,7 +48,7 @@ public class PageActions {
         wd.findElement(By.id("fullname")).click();
         wd.findElement(By.id("fullname")).clear();
         wd.findElement(By.id("fullname")).sendKeys(personalInfo.getFullname());
-        wd.findElement(By.xpath(".//div[@class='suggestions-suggestion'][1]")).click();
+        wd.findElement(By.xpath(".//div[@class='col-xs-12 col-md-6'][1]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']/div[2]")).click();
     }
 
     public void fillSurname(PersonalInfo personalInfo) {
@@ -75,7 +75,7 @@ public class PageActions {
         wd.findElement(By.id("address")).click();
         wd.findElement(By.id("address")).clear();
         wd.findElement(By.id("address")).sendKeys(personalInfo.getFullAddress());
-        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='suggestions-suggestion'][1]")));
+        new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")));
         wd.findElement(By.xpath(".//div[@class='col-xs-12 col-md-6'][2]/div[@class='form-group']/div[@class='suggestions-wrapper']/div[@class='suggestions-suggestions']")).click();
     }
 

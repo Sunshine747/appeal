@@ -33,7 +33,6 @@ public class NegativeTest extends TestTemplate {
         page.fillEmail(user);
         page.sendMessageForNegative();
         assertions.assertThatFeedbackMessageIsHide();
-
     }
 
 }
