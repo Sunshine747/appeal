@@ -232,6 +232,12 @@ public class PageActions {
         return wd.findElement(By.xpath(".//label[@for='address-flat']")).getText();
     }
 
+    public String getRequiredLabelFIO() { return wd.findElement(By.xpath("//div[label[@for='fullname']]/span")).getText();}
+
+    public String getRequiredLabelEmail() { return wd.findElement(By.xpath("//div[label[@for='email']]/span")).getText();}
+
+    public String getRequiredLabelMessage() { return wd.findElement(By.xpath("//div[label[@for='message']]/span")).getText();}
+
     public String getSubmitButtonText(){
         return wd.findElement(By.xpath(".//button[@class='btn btn-primary btn-lg']")).getText();
     }

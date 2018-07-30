@@ -41,11 +41,6 @@ public class PositiveFullTest extends TestTemplate {
         page.fillHouse(user);
         page.fillFlat(user);
         page.choiceAddress();
-        System.out.println(page.getIndex());
-        System.out.println(page.getRegion());
-        System.out.println(page.getCity());
-        System.out.println(page.getStreet());
-        System.out.println(page.getHouse());
-        System.out.println(page.getFlat());
+        assertions.assertThatAutoFillAddressIsCorrect();
     }
 }

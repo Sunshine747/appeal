@@ -39,7 +39,9 @@ public class PageAssertions {
         assertThat(page.getHouseLableText(), equalTo("Дом"));
         assertThat(page.getFlatLableText(), equalTo("Квартира"));
         assertThat(page.getSubmitButtonText(), equalTo("Отправить обращение"));
-
+        assertThat(page.getRequiredLabelFIO(), equalTo(" ∗"));
+        assertThat(page.getRequiredLabelEmail(), equalTo(" ∗"));
+        assertThat(page.getRequiredLabelMessage(), equalTo(" ∗"));
     }
 
     public void assertThatFeedbackMessageIsCorrect() {
@@ -67,6 +69,15 @@ public class PageAssertions {
 
     public void assertThatFeedbackMessageIsPresent() {
         assertThat(page.findFeedbackMessage(), equalTo(true));
+    }
+
+    public void assertThatAutoFillAddressIsCorrect() {
+        assertThat(page.getIndex(), equalTo("190000"));
+        assertThat(page.getRegion(), equalTo("г Санкт-Петербург"));
+        assertThat(page.getCity(), equalTo("г Санкт-Петербург"));
+        assertThat(page.getStreet(), equalTo("наб Адмиралтейская"));
+        assertThat(page.getHouse(), equalTo("д 1"));
+        assertThat(page.getFlat(), equalTo("кв 1"));
     }
 
     public void assertAlert() {
