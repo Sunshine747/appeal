@@ -5,11 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.sunshine747.appeal.model.PersonalInfo;
 
 import java.util.concurrent.TimeUnit;
+
 
 public class PageActions {
 
@@ -25,8 +27,13 @@ public class PageActions {
     }
 
     public void openPage() {
+
+        FirefoxOptions opt = new FirefoxOptions();
+    opt.addArguments("--headless");
+
+
         WebDriverManager.firefoxdriver().setup();
-        wd = new FirefoxDriver();
+        wd = new FirefoxDriver(opt);
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://hflabs.github.io/suggestions-demo/");
     }
