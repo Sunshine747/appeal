@@ -29,8 +29,7 @@ public class PageActions {
     public void openPage() {
 
         FirefoxOptions opt = new FirefoxOptions();
-    opt.addArguments("--headless");
-
+        opt.addArguments("--headless");
 
         WebDriverManager.firefoxdriver().setup();
         wd = new FirefoxDriver(opt);
